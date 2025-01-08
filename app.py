@@ -93,9 +93,16 @@ def recommend_story(storyline):
     input_vector = cv.transform([storyline]).toarray()
     distances = cosine_similarity(input_vector, vector)
     movie_list = sorted(list(enumerate(distances[0])), key=lambda x: x[1], reverse=True)[:10]
+    recommendations = []
+    for i in movie_list[:6]:
+        title = r_movies.iloc[i[0]].title
+        movie_id = r_movies.iloc[i[0]].id
+        thumbnail = get_movie_thumbnail(movie_id)
+        recommendations.append({'title': title, 'thumbnail': thumbnail})
+    return recommendations
 
     # Fetch recommended movie titles
-    return [movies.iloc[i[0]].title for i in movie_list]
+    # return [movies.iloc[i[0]].title for i in movie_list]
 
 
 @app.route('/')

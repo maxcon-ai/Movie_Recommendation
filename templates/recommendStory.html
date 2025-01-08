@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <title>Recommendations</title>
 </head>
 <body>
     <h1>Recommendations for "{{ movie_name }}"</h1>
     <ul>
         {% for movie in recommendations %}
-            <li>{{ movie }}</li>
+        <li>
+            <img src="{{ movie.thumbnail }}" alt="{{ movie.title }}">
+            <p>{{ movie.title }}</p>
+        </li>
         {% endfor %}
     </ul>
     <a href="/">Back to Home</a>
