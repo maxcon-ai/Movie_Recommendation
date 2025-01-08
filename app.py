@@ -77,7 +77,7 @@ def suggest_movies(genres=None, min_rating=None, year=None):
     else:
         suggestion = suggestion[suggestion['ratings'] >= 0]
     recommendations = []
-    for _,i in suggestion[:5].iterrows():
+    for _,i in suggestion[:8].iterrows():
         title = i['title']
         movie_id = i['id']
         rating = i['ratings']
@@ -90,7 +90,7 @@ def recommend(movie):
     distances = similarity[movie_index]
     movie_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])
     recommendations = []
-    for i in movie_list[:6]:
+    for i in movie_list[:9]:
         title = r_movies.iloc[i[0]].title
         movie_id = r_movies.iloc[i[0]].id
         rating = f_movies.iloc[i[0]].ratings
@@ -102,11 +102,12 @@ def recommend_story(storyline):
     distances = cosine_similarity(input_vector, vector)
     movie_list = sorted(list(enumerate(distances[0])), key=lambda x: x[1], reverse=True)[:10]
     recommendations = []
-    for i in movie_list[:6]:
+    for i in movie_list[:8]:
         title = r_movies.iloc[i[0]].title
         movie_id = r_movies.iloc[i[0]].id
+        rating = f_movies.iloc[i[0]].ratings
         thumbnail = get_movie_thumbnail(movie_id)
-        recommendations.append({'title': title, 'thumbnail': thumbnail})
+        recommendations.append({'title': title, 'thumbnail': thumbnail,'rating': rating})
     return recommendations
 
     # Fetch recommended movie titles
