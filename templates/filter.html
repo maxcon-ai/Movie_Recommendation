@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <title>Filtered Movies</title>
 </head>
 <body>
     <h1>Filtered Movies</h1>
     <ul>
         {% for movie in suggestions %}
-            <li>{{ movie['title'] }} (Rating: {{ movie['ratings'] }}, Year: {{ movie['year'] }})</li>
+        <li>
+            <img src="{{ movie.thumbnail }}" alt="{{ movie.title }}">
+            <p style="color: white;">Rating: <span style="color: yellow;">{{movie.rating}}</span></p>
+            <p>{{ movie.title }}</p>
+        </li>
         {% endfor %}
     </ul>
     <a href="/">Back to Home</a>

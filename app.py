@@ -76,7 +76,14 @@ def suggest_movies(genres=None, min_rating=None, year=None):
         suggestion = suggestion[suggestion['ratings'] >= float(min_rating)]
     else:
         suggestion = suggestion[suggestion['ratings'] >= 0]
-    return suggestion[['title', 'ratings', 'year']].to_dict(orient='records')[:5]
+    recommendations = []
+    for _,i in suggestion[:5].iterrows():
+        title = i['title']
+        movie_id = i['id']
+        rating = i['ratings']
+        thumbnail = get_movie_thumbnail(movie_id)
+        recommendations.append({'title': title, 'thumbnail': thumbnail,'rating': rating})
+    return recommendations
 
 def recommend(movie):
     movie_index = r_movies[r_movies['title'] == movie].index[0]
@@ -136,6 +143,8 @@ def filter_movies():
     genres = request.form.get('genres', None)
     min_rating = request.form.get('min_rating', None)
     year = request.form.get('year', None)
+    if not genres and not min_rating and not year:
+        return render_template('index.html', message="Please enter any parametter.")
     suggestions = suggest_movies(genres, min_rating, year)
     return render_template('filter.html', suggestions=suggestions)
     
