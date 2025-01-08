@@ -86,8 +86,9 @@ def recommend(movie):
     for i in movie_list[:6]:
         title = r_movies.iloc[i[0]].title
         movie_id = r_movies.iloc[i[0]].id
+        rating = f_movies.iloc[i[0]].ratings
         thumbnail = get_movie_thumbnail(movie_id)
-        recommendations.append({'title': title, 'thumbnail': thumbnail})
+        recommendations.append({'title': title, 'thumbnail': thumbnail,'rating': rating})
     return recommendations
 def recommend_story(storyline):
     input_vector = cv.transform([storyline]).toarray()

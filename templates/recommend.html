@@ -50,6 +50,7 @@
         {% for movie in recommendations %}
         <li>
             <img src="{{ movie.thumbnail }}" alt="{{ movie.title }}">
+            <p style="color: white;">Rating: <span style="color: yellow;">{{movie.rating}}</span></p>
             <p>{{ movie.title }}</p>
         </li>
         {% endfor %}
