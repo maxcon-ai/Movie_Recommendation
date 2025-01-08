@@ -1,3 +1,25 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendations</title>
+</head>
+<body>
+    <h1>Recommendations for "{{ movie_name }}"</h1>
+    <ul>
+        <ul>
+            {% for movie in recommendations %}
+            <li>
+                <img src="{{ movie.thumbnail }}" alt="{{ movie.title }}" width="100">
+                <p>{{ movie.title }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+    </ul>
+    <a href="/">Back to Home</a>
+</body>
+</html> -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +31,9 @@
 </head>
 <body>
     <form id="searchForm" class="form1" action="/recommend" method="POST">
-        <p class="form-heading" style="text-align: center;">Search for Movies</p>
-        <input type="text" id="movie_name" name="movie_name" oninput="fetchSuggestions(this.value)" list="suggestions" placeholder="Type a movie name...." autocomplete="off" value="{{movie_name}}">
+        <p class="form-heading">Search for Movies</p>
+        <label for="movie_name">Enter Movie Name:</label>
+        <input type="text" id="movie_name" name="movie_name" oninput="fetchSuggestions(this.value)" list="suggestions" placeholder="Type a movie name" autocomplete="off" value="{{movie_name}}">
         <datalist id="suggestions"></datalist>
         <button type="submit">Get Recommendations</button>
     </form>
@@ -18,7 +41,7 @@
     <ul>
         <li class="li">
             <img src="{{ search.thumbnail }}" alt="{{ search.title }}">
-            <p style="color: white;">Rating: <span style="color: yellow;">{{movie.rating}}</span></p>
+
             <p>{{ search.title }}</p>
         </li>
     </ul>
